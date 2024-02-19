@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RickAndMortyApiResponse {
+public class RickAndMortyInfo {
 
-    RickAndMortyInfo info;
-    List<RickAndMortyChar> results;
+    private int count;
 }
