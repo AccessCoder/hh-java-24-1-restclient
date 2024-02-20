@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RickAndMortyChar {
 
-    private String id;
+    private int id;
     private String name;
     private String status;
 

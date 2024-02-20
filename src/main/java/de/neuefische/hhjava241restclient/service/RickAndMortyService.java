@@ -2,6 +2,7 @@ package de.neuefische.hhjava241restclient.service;
 
 import de.neuefische.hhjava241restclient.model.RickAndMortyApiResponse;
 import de.neuefische.hhjava241restclient.model.RickAndMortyChar;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -10,9 +11,14 @@ import java.util.List;
 @Service
 public class RickAndMortyService {
 
-    private RestClient currywurst = RestClient.builder()
-            .baseUrl("https://rickandmortyapi.com/api")
-            .build();
+    private RestClient currywurst;
+
+    public RickAndMortyService(@Value("${basic.url}") String baseurl) {
+        currywurst = RestClient.builder()
+                .baseUrl(baseurl)
+                .build();
+    }
+
     public List<RickAndMortyChar> getAllRickAndMortyChars() {
        RickAndMortyApiResponse response = currywurst.get()
                 .uri("/character")
