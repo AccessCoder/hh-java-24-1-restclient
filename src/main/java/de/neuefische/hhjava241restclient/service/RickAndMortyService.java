@@ -1,5 +1,6 @@
 package de.neuefische.hhjava241restclient.service;
 
+import de.neuefische.hhjava241restclient.exception.InvalidIdException;
 import de.neuefische.hhjava241restclient.model.RickAndMortyApiResponse;
 import de.neuefische.hhjava241restclient.model.RickAndMortyChar;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,11 +29,17 @@ public class RickAndMortyService {
     }
 
     public RickAndMortyChar getRickAndMortyCharById(String id) {
-        RickAndMortyChar response = currywurst.get()
-                .uri("/character/"+id)
-                .retrieve()
-                .body(RickAndMortyChar.class);
-        return response;
+        if (Integer.parseInt(id) <= 850){
+            RickAndMortyChar response = currywurst.get()
+                    .uri("/character/"+id)
+                    .retrieve()
+                    .body(RickAndMortyChar.class);
+            return response;
+        }else {
+            throw new InvalidIdException("Id: " + id + " is not valid, please choose between 1 and 850");
+        }
+
+
     }
 
     public List<RickAndMortyChar> getFilteredRickAndMortyChars(String status) {
